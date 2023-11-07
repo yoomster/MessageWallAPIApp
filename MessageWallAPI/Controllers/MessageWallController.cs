@@ -1,5 +1,4 @@
-﻿using MessageWallAPI.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Build.Framework;
 using NuGet.Protocol.Core.Types;
 

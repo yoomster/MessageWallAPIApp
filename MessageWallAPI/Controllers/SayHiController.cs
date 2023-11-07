@@ -1,5 +1,4 @@
-﻿using MessageWallAPI.Models;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MessageWallAPI.Controllers
