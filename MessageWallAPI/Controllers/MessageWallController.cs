@@ -1,35 +1,47 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using MessageWallAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Build.Framework;
+using NuGet.Protocol.Core.Types;
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace MessageWallAPI.Controllers
 {
-    public class MessageWallController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class MessageWallController : ControllerBase
     {
-        // GET: MessageWallController
-        public ActionResult Index()
+        private readonly ILogger<MessageWallController> _logger;
+
+        public MessageWallController(ILogger<MessageWallController> logger)
         {
-            return View();
+            _logger = logger;
         }
 
-        // GET: MessageWallController/Create
-        public ActionResult Create()
+        // GET: api/<MessageWallController>
+        [HttpGet]
+        public IEnumerable<string> Get(string message = "")
         {
-            return View();
+            List<string> output = new List<string>
+            {
+                "Hello World"
+            };
+
+            if (!string.IsNullOrWhiteSpace(message))
+            {
+                output.Add(message);
+            }
+
+            return output;
         }
 
-        // POST: MessageWallController/Create
+        // POST api/<MessageWallController>
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public void Post([FromBody] string message)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            _logger.LogInformation("Message was {Message}", message);
         }
+
+
     }
 }
