@@ -19,18 +19,18 @@ namespace MessageWallAPI.Controllers
 
         // GET: api/<MessageWallController>
         [HttpGet]
-        public IEnumerable<string> Get(string message = "")
+        public IEnumerable<string> Get([FromBody] MessageDto message)
         {
             List<string> output = new List<string>
             {
-                "Hello World"
+                "Hello World",
+                "Bla bla "
             };
 
-            if (!string.IsNullOrWhiteSpace(message))
+            if (string.IsNullOrWhiteSpace(message.Message) == false)
             {
-                output.Add(message);
+                output.Add(message.Message);
             }
-
             return output;
         }
 
@@ -40,7 +40,7 @@ namespace MessageWallAPI.Controllers
         {
             _logger.LogInformation("Message was {Message}", message);
         }
-
-
     }
+    
+    public record MessageDto (string Message);
 }
